@@ -5,9 +5,9 @@ const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
 
 const testUser = {
-  firstName: 'Test User',
-  lastName: 'Testing User',
-  email: 'user@testing.com',
+  firstName: 'User',
+  lastName: 'Test',
+  email: 'user@test.com',
   password: '123456789',
 };
 
@@ -25,9 +25,9 @@ describe('restaurants routes', () => {
     return setup(pool);
   });
 
-  test('GET api/v1/restaurants should return a list of restaurants', async () => {
+  test('GET api/v1/restaurants returns a list of restaurants', async () => {
     const res = await request(app).get('/api/v1/restaurants');
-    // expect(res.status).toBe(200);
+    expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
       Array [
         Object {
@@ -68,7 +68,7 @@ describe('restaurants routes', () => {
 
   test('GET api/v1/restaurants/:id should return a restaurant with reviews', async () => {
     const res = await request(app).get('/api/v1/restaurants/1');
-    // expect(res.status).toBe(200);
+    expect(res.status).toBe(200);
     expect(res.body).toMatchInlineSnapshot(`
       Object {
         "cost": 1,
