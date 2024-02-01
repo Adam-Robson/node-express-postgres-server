@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const UserService = require('../lib/services/UserService');
+const console = require('../util/logger').console;
 
 const testUser = {
   firstName: 'User',
@@ -19,6 +20,7 @@ const registerAndLogin = async (userProps = {}) => {
   await agent.post('/api/v1/users/sessions').send({ email, password });
   return [agent, user];
 };
+console.log(new Date().toISOString() + ' Restaurant Tests ' + 'User registered and logged in');
 
 describe('restaurants routes', () => {
   beforeEach(() => {
