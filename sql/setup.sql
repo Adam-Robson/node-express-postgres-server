@@ -1,4 +1,5 @@
 -- SQL in this file can be executed with `npm run setup-db`
+
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS books CASCADE;
 DROP TABLE IF EXISTS authors CASCADE;
