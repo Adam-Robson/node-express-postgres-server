@@ -1,17 +1,8 @@
-//  eslint.config.cjs
-
-//  This is a mapping of the configuration options that can be used
-//  when using an `eslint.config.cjs` ESLint configuration file.
-
-//  To include the pre-defined recommended rules from ESLint,
-//  install the package @eslint/js. Then, require the package:
-//  const js = require(@eslint/js);
-//  and then add this to the array of configuration: js.configs.recommended
-const js = require('@eslint/js');
+import js from '@eslint/js'
 
 const eslintConfig = 'eslint-config';
 
-module.exports = [
+export default [
   js.configs.recommended,
   {
     name: eslintConfig,
@@ -22,7 +13,9 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 'es2020',
       sourceType: 'commonjs',
-      globals: [],
+      globals: [
+        'process'
+      ],
       parser: '@babel/eslint-parser',
       parserOptions: {},
     },
