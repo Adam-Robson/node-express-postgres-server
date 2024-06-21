@@ -1,8 +1,9 @@
--- Use this file to define your SQL tables
--- The SQL in this file will be executed when you run `npm run setup-db`
+-- SQL in this file can be executed with `npm run setup-db`
+
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS restaurants CASCADE;
-DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS authors CASCADE;
+DROP TABLE IF EXISTS authors_books;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -12,23 +13,26 @@ CREATE TABLE users (
   last_name VARCHAR
 );
 
-CREATE TABLE restaurants (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR NOT NULL,
-  cuisine VARCHAR NOT NULL,
-  cost INT NOT NULL,
-  image VARCHAR,
-  website VARCHAR
+CREATE TABLE books (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    released SMALLINT NOT NULL
 );
 
-CREATE TABLE reviews (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  user_id BIGINT NOT NULL,
-  restaurant_id BIGINT NOT NULL,
-  stars INT NOT NULL,
-  detail VARCHAR NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+CREATE TABLE authors (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    dob DATE NOT NULL,
+    pob VARCHAR NOT NULL
+);
+
+CREATE TABLE authors_books (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    author_id BIGINT NOT NULL,
+    book_id BIGINT NOT NULL,
+    title VARCHAR NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY 
 );
 
 INSERT INTO
@@ -53,41 +57,63 @@ VALUES
     'C'
   );
 
-INSERT INTO
-  restaurants (name, cuisine, cost, image, website)
+INSERT INTO books
+(title, released)
 VALUES
-  (
-    'Pip''s Original',
-    'American',
-    1,
-    'https://media-cdn.tripadvisor.com/media/photo-o/05/dd/53/67/an-assortment-of-donuts.jpg',
-    'http://www.PipsOriginal.com'
-  ),
-  (
-    'Mucca Osteria',
-    'Italian',
-    3,
-    'https://media-cdn.tripadvisor.com/media/photo-m/1280/13/af/df/89/duck.jpg',
-    'http://www.muccaosteria.com'
-  ),
-  (
-    'Mediterranean Exploration Company',
-    'Mediterranean',
-    2,
-    'https://media-cdn.tripadvisor.com/media/photo-m/1280/1c/f2/e5/0c/dinner.jpg',
-    'http://www.mediterraneanexplorationcompany.com/'
-  ),
-  (
-    'Salt & Straw',
-    'American',
-    2,
-    'https://media-cdn.tripadvisor.com/media/photo-o/0d/d6/a1/06/chocolate-gooey-brownie.jpg',
-    'https://saltandstraw.com/pages/nw-23'
-  );
+    ('The Ingenious Gentleman Don Quixote of La Mancha', 1615),
+    ('La Galatea', 1585),
+    ('Frankenstein', 1818),
+    ('The Invisible Man', 1952),
+    ('Going to the Territory', 1986),
+    ('Narrative of the Life of Frederick Douglas', 1845),
+    ('My Bondage and My Freedom', 1855),
+    ('The Lottery in Babylon', 1941),
+    ('A Tale of Two Cities', 1859),
+    ('David Copperfield', 1850),
+    ('The Count of Monte Cristo', 1844),
+    ('The Scarlett Letter', 1850),
+    ('The Color Purple', 1982),
+    ('A Hitchikers Guide to the Galaxy', 1979),
+    ('Black Beauty', 1877),
+    ('Moby Dick', 1851),
+    ('Brave New World', 1932),
+    ('The Perrenial Philosophy', 1945);
 
-INSERT INTO
-  reviews (user_id, restaurant_id, stars, detail)
+INSERT INTO authors
+(name, dob, pob)
 VALUES
-  (1, 1, 5, 'Best restaurant ever!'),
-  (2, 1, 1, 'Terrible service.'),
-  (3, 1, 4, 'It was fine.');
+    ('Miguel de Cervantes', '1547-09-29', 'Alcala de Henares, Spain'),
+    ('Mary Shelley', '1797-08-30', 'Somers Town, London, UK'),
+    ('Ralph Ellison', '1914-03-01', 'Oklahoma City, OK, US'),
+    ('Frederick Douglass', '1818-02-01', 'Talbot County, MD, US'),
+    ('Jorge Luis Borges', '1899-08-24', 'Buenos Aires, Argentina'),
+    ('Charles Dickens', '1812-02-07', 'Landport, Portsmouth, UK'),
+    ('Alexander Dumas', '1802-07-24', 'Villers-Cotterêts, France'),
+    ('Nathaniel Hawthorne', '1804-07-04', 'Salem, MA, US'),
+    ('Alice Walker', '1944-02-09', 'Eatonton, GA, US'),
+    ('Douglas Adams', '1952-03-11', 'Cambridge, UK'),
+    ('Anna Sewell', '1820-05-30', 'Great Yarmouth, UK'),
+    ('Herman Melville', '1819-08-01', 'New York, NY, US'),
+    ('Aldous Huxley', '1894-07-26', 'Godalming, UK');
+
+INSERT INTO authors_books
+(author_id, book_id, title)
+VALUES
+    (1, 1, 'The Ingenious Gentleman Don Quixote of La Mancha'),
+    (1, 2, 'La Galatea'),
+    (2, 3, 'Frankenstein'),
+    (3, 4, 'The Invisible Man'),
+    (3, 5, 'Going to the Territory'),
+    (4, 6, 'Narrative of the Life of Frederick Douglas'),
+    (4, 7, 'My Bondage and My Freedom'),
+    (5, 8, 'The Lottery in Babylon'),
+    (6, 9, 'A Tale of Two Cities'),
+    (6, 10, 'David Copperfield'),
+    (7, 11, 'The Count of Monte Cristo'),
+    (8, 12, 'The Scarlett Letter'),
+    (9, 13, 'The Color Purple'),
+    (10, 14, 'A Hitchiker&apos;s Guide to the Galaxy'),
+    (11, 15, 'Black Beauty'),
+    (12, 16, 'Moby Dick'),
+    (13, 17, 'Brave New World'),
+    (13, 18, 'The Perennial Philosophy');
