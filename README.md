@@ -14,9 +14,6 @@ This is a node application built with [Express](https://expressjs.com/) and [Pos
   - [Run Locally](#run-locally)
   - [Routes](#routes)
   - [Technologies Used](#technologies-used)
-  - [Authors](#authors)
-  - [Acknowledgements](#acknowledgements)
-  - [Contact](#contact)
 
 ## General Information
 
@@ -32,13 +29,15 @@ It includes the functionality to Create Read Update and Delete books from the da
 
 ## Run Locally
 
-| Command                | Description                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `npm start`            | Starts the app - should only be used in production as changes will not get reloaded |
-| `npm run start:watch`  | Runs the app using `nodemon` which watches for changes and reloads the app          |
-| `npm test`             | Runs the tests once                                                                 |
-| `npm run test:watch`   | Continually watches and runs the tests when files are updated                       |
-| `npm run setup-db`     | Sets up the database locally                                                        |
+| Command                 |        Description                             |
+| `npm start`             | Starts the app - should only be used in        |
+|                         | production as changes will not get reloaded    |
+| `npm run start:watch`   | Runs the app using `nodemon` which watches for |
+|                         | changes and reloads the app                    |
+| `npm test`              | Runs the tests once                            |
+| `npm run test:watch`    | Continually watches and runs the tests when    |
+|                         | files are updated                              |
+| `npm run setup-db`      | Sets up the database locally                   |
 
 ## Routes
 
@@ -61,16 +60,3 @@ It includes the functionality to Create Read Update and Delete books from the da
 - ESLint
 - Prettier
 - GitHub Actions
-
-## Authors
-
-> [@Adam-Robson](https://www.github.com/Adam-Robson)
-
-## Acknowledgements
-
-Thanks to [Julie Nisbet](https://www.github.com/julienisbet), whose guidance was invaluable.
-
-## Contact
-
-I can be messaged through LinkedIn by clicking on the badge above or by emailing me at adamrayrobson@gmail.com.
-
